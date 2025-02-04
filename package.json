@@ -1,0 +1,25 @@
+{
+  "name": "msc-dialogs",
+  "version": "1.0.0",
+  "description": "<msc-dialogs /> is a common dialog effect. It comes with high customize user interface and show / close animation. It also suitable for all resolution. All we need to do is just put content we like to display as its children and everything will be all set.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meistudioli/msc-dialogs.git"
+  },
+  "keywords": [
+    "web",
+    "front-end",
+    "web component",
+    "dialog"
+  ],
+  "author": "Paul Li",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/meistudioli/msc-dialogs/issues"
+  },
+  "homepage": "https://github.com/meistudioli/msc-dialogs#readme"
+}
