@@ -96,7 +96,8 @@ Otherwise delevelopers could also add attribute - `data-hide-close-button` to hi
 | Event Signature | Description |
 | ----------- | ----------- |
 | msc-dialogs-close | Fired when &lt;msc-dialogs /> closed. |
-| msc-dialogs-toggle | Fired when &lt;msc-dialogs /> show or close. Developers could gather state information through `event.detail.newState`. |
+| msc-dialogs-beforetoggle | Fired before &lt;msc-dialogs /> is shown or hidden. Developers could gather state information through `event.detail`. |
+| msc-dialogs-toggle | Fired when &lt;msc-dialogs /> is shown or hidden. Developers could gather state information through `event.detail`. |
 
 ## Mathods
 | Mathod Signature | Description |
