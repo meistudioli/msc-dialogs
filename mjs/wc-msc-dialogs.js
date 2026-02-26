@@ -8,13 +8,18 @@ import { _wccss } from './common-css.js';
  - https://frontendmasters.com/blog/the-dialog-element-with-entry-and-exit-animations/
  */
 
-const defaults = {};
+const defaults = {
+  closedby: 'any'
+};
 const booleanAttrs = []; // booleanAttrs default should be false
 const objectAttrs = [];
 const custumEvents = {
   close: 'msc-dialogs-close',
   toggle: 'msc-dialogs-toggle',
   beforetoggle: 'msc-dialogs-beforetoggle'
+};
+const attrsAndPropsMapping = {
+  closedby: 'closedBy'
 };
 
 const template = document.createElement('template');
@@ -55,6 +60,7 @@ ${_wccss}
   --button-hover-active: var(--msc-dialogs-button-active-background-color, rgba(245, 248, 250));
   --button-hover: var(--button-hover-active);
   --button-active-scale: var(--msc-dialogs-button-active-scale, .8);
+  --button-display: grid;
 
   --max-inline-size: calc(100dvi - var(--margin) * 2 - var(--padding) * 2);
   --max-block-size: calc(100dvb - var(--margin) * 2 - var(--padding) * 2);
@@ -66,6 +72,10 @@ ${_wccss}
   box-shadow: 0 0 2px rgba(0 0 0/.05);
   outline: 0 none;
   appearance: none;
+
+  &[closedby=none] {
+    --button-display: none;
+  }
 
   .dialogs__content {
     max-inline-size: var(--max-inline-size);
@@ -86,7 +96,7 @@ ${_wccss}
     padding: 0;
     margin: 0;
     color: transparent;
-    display: grid;
+    display: var(--button-display);
     place-content: center;
 
     position: absolute;
@@ -379,6 +389,42 @@ export class MscDialogs extends HTMLElement {
     }
   }
 
+  #format(attrName, oldValue, newValue) {
+    const hasValue = newValue !== null;
+
+    if (!hasValue) {
+      if (booleanAttrs.includes(attrName)) {
+        this.#config[attrName] = false;
+      } else {
+        this.#config[attrName] = defaults[attrName];
+      }
+    } else {
+      switch (attrName) {
+        case 'closedby': {
+          const value = newValue.trim();
+
+          this.#config.closedby = ['any', 'closerequest', 'none'].includes(value) ? value : defaults[attrName];
+          break;
+        }
+      }
+    }
+  }
+
+  attributeChangedCallback(attrName, oldValue, newValue) {
+    if (!MscDialogs.observedAttributes.includes(attrName)) {
+      return;
+    }
+
+    this.#format(attrName, oldValue, newValue);
+
+    switch (attrName) {
+      case 'closedby': {
+        this.#nodes.dialog.closedBy = this.#config.closedby;
+        break;
+      }
+    }
+  }
+
   static get observedAttributes() {
     return Object.keys(defaults); // MscDialogs.observedAttributes
   }
@@ -408,12 +454,24 @@ export class MscDialogs extends HTMLElement {
         }
       }
 
-      this[prop] = value;
+      this[attrsAndPropsMapping[prop] || prop] = value;
     }
   }
 
   get open() {
     return this.#nodes.dialog.open;
+  }
+
+  get closedBy() {
+    return this.#config.closedby;
+  }
+
+  set closedBy(value) {
+    if (typeof value !== 'undefined') {
+      this.setAttribute('closedby', value);
+    } else {
+      this.removeAttribute('closedby');
+    }
   }
 
   #fireEvent(evtName, detail) {

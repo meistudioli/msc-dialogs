@@ -87,10 +87,21 @@ Otherwise delevelopers could also add attribute - `data-hide-close-button` to hi
 </msc-dialogs>
 ```
 
-## Property
+## Attribute
+&lt;msc-dialogs /> supports some attributes to let it become more convenience & useful.
+
+- **closedby**
+Specifies the types of user actions that can be used to close &lt;msc-dialogs />. Valid values are `any`、`closerequest` and `none`. The default is `any`.
+
+`any`：&lt;msc-dialogs /> can be dismissed using any of the three methods. (light dismiss user action、platform-specific user action、developer-specified mechanism).\
+`closerequest`：&lt;msc-dialogs /> can be dismissed with a platform-specific user action or a developer-specified mechanism..\
+`none`：&lt;msc-dialogs /> can only be dismissed with a developer-specified mechanism.
+
+## Properties
 | Property Name | Type | Description |
 | ----------- | ----------- | ----------- |
 | open | Boolean | Getter &lt;msc-dialogs />'s open state. |
+| closedBy | String | Getter / Setter type of user action to close &lt;msc-dialogs />. Valid values are `any`、`closerequest` and `none`. The default is `any`. |
 
 ## Events
 | Event Signature | Description |
@@ -108,6 +119,7 @@ Otherwise delevelopers could also add attribute - `data-hide-close-button` to hi
 
 ## Reference
 - [&lt;msc-dialogs /> demo](https://blog.lalacube.com/mei/webComponent_msc-dialogs.html)
+- [&lt;dialog>: The Dialog element](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog)
 - [WEBCOMPONENTS.ORG](https://www.webcomponents.org/element/msc-dialogs)
 - [YouTube tutorial](https://youtube.com/shorts/DkmxluhkvnM)
 
