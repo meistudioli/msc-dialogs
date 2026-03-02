@@ -107,6 +107,7 @@ Specifies the types of user actions that can be used to close &lt;msc-dialogs />
 | Event Signature | Description |
 | ----------- | ----------- |
 | msc-dialogs-close | Fired when &lt;msc-dialogs /> closed. |
+| msc-dialogs-cancel | Fired when &lt;msc-dialogs /> canceled. Developers could gather state information through `event.detail`. |
 | msc-dialogs-beforetoggle | Fired before &lt;msc-dialogs /> is shown or hidden. Developers could gather state information through `event.detail`. |
 | msc-dialogs-toggle | Fired when &lt;msc-dialogs /> is shown or hidden. Developers could gather state information through `event.detail`. |
 

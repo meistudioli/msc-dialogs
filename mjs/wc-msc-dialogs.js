@@ -15,6 +15,7 @@ const booleanAttrs = []; // booleanAttrs default should be false
 const objectAttrs = [];
 const custumEvents = {
   close: 'msc-dialogs-close',
+  cancel: 'msc-dialogs-cancel',
   toggle: 'msc-dialogs-toggle',
   beforetoggle: 'msc-dialogs-beforetoggle'
 };
@@ -350,6 +351,7 @@ export class MscDialogs extends HTMLElement {
 
     // evts
     this._onClose = this._onClose.bind(this);
+    this._onCancel = this._onCancel.bind(this);
     this._onBeforetoggle = this._onBeforetoggle.bind(this);
     this._onToggle = this._onToggle.bind(this);
     this._onClick = this._onClick.bind(this);
@@ -378,6 +380,7 @@ export class MscDialogs extends HTMLElement {
     const signal = this.#data.controller.signal;
 
     dialog.addEventListener('close', this._onClose, { signal });
+    dialog.addEventListener('cancel', this._onCancel, { signal });
     dialog.addEventListener('beforetoggle', this._onBeforetoggle, { signal });
     dialog.addEventListener('toggle', this._onToggle, { signal });
     btnClose.addEventListener('click', this._onClick, { signal });
@@ -506,6 +509,16 @@ export class MscDialogs extends HTMLElement {
 
   _onClose() {
     this.#fireEvent(custumEvents.close);
+  }
+
+  _onCancel(event) {
+    this.#fireEvent(custumEvents.cancel,
+      {
+        preventDefault: () => {
+          event.preventDefault();
+        }
+      }
+    );
   }
 
   _onClick() {
