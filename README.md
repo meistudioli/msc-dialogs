@@ -63,6 +63,7 @@ nodeB.appendChild(template.content.cloneNode(true));
 <style>
 msc-dialogs {
   --msc-dialogs-background-color: rgba(255 255 255);
+  --msc-dialogs-box-shadow: 0 0 2px rgba(0 0 0/.05);
   --msc-dialogs-backdrop-background-color: rgba(35 42 49/.6);
   --msc-dialogs-border-radius: 12px;
   --msc-dialogs-margin: 24px;
